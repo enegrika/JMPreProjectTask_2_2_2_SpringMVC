@@ -40,28 +40,22 @@ public class CarController {
     }
 
     @GetMapping(value = "/cars")
-    public String getAllCars(@RequestParam(required = false, name = "count") Integer id,
-                             Model model) {
-        model.addAttribute("carListFromController", carListInner);
-        model.addAttribute("carObjById", carListInner.get(id - 1));
+    public String getAllCars(@RequestParam(required = false, defaultValue = "0", name = "count")
+                                     int id, Model model) {
+        List<Car> resultList = new ArrayList<>();
 
-//        model.addAttribute("carListFromDao", carDAO.getCarList());
-        if (id > 0 && id < 5) {
-            return "showCar";
-        } else
-            return "cars";
+        if (id <= 0) {
+            resultList = null;
+        } else if (id > 0 & id < 5) {
+            for (int i = 0; i < id; i++) {
+                resultList.add(carListInner.get(id - 1));
+            }
+        } else {
+            resultList = carListInner;
+        }
+        model.addAttribute("carResultList", resultList);
+        return "cars";
     }
 
-//    @GetMapping(value = "/cars")
-//    public String getCarById(@RequestParam(name = "count") int id, Model model) {
-//        if (id < 5) {
-//            model.addAttribute("carObjById", carListInner.get(id));
-//
-////        model.addAttribute("carObjById", carDAO.getCarById(id));
-//            return "showCar";
-//
-//        }
-//        return "redirect:/cars";
-//    }
 
 }
