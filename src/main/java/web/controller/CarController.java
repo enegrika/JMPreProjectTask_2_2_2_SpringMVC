@@ -48,7 +48,7 @@ public class CarController {
             resultList = null;
         } else if (id > 0 & id < 5) {
             for (int i = 0; i < id; i++) {
-                resultList.add(carListInner.get(id - 1));
+                resultList.add(carListInner.get(i));
             }
         } else {
             resultList = carListInner;
