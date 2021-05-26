@@ -40,7 +40,7 @@ public class CarController {
     }
 
     @GetMapping(value = "/cars")
-    public String getAllCars(@RequestParam(required = false, defaultValue = "0", name = "count")
+    public String getAllCars(@RequestParam(required = false, defaultValue = "6", name = "count")
                                      int id, Model model) {
         List<Car> resultList = new ArrayList<>();
 
